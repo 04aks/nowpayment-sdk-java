@@ -2,18 +2,14 @@ package aks;
 
 import java.util.Scanner;
 
-import aks.auth.Authenticate;
-import aks.crypto.GET.AvailableCrypto;
-import aks.profile.User;
 import aks.statics.Commands;
 
 public class Main {
 
     
     public static void main(String[] args) {
-        User user = new User();
-        Authenticate authenticate = new Authenticate(user);
-        AvailableCrypto availableCrypto = new AvailableCrypto();
+        App app = new App();
+
         
 
         String response;
@@ -22,8 +18,9 @@ public class Main {
         
         
         switch (response) {
-            case Commands.AUTH: authenticate.startAuth(); break;
-            case Commands.AVA_CURR: availableCrypto.getAvailableCurrencies(); break;
+            case Commands.AUTH: app.authenticate.startAuth(); break;
+            case Commands.AVA_CURR: app.availableCrypto.getAvailableCurrencies(); break;
+            case Commands.SELECT_ITEM: app.selectItem.inspectItem(app.testClassItems.getItems());
         
             default:
                 break;
