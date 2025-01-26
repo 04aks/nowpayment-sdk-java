@@ -20,7 +20,7 @@ public class Main {
         switch (response) {
             case Commands.AUTH: app.authenticate.startAuth(); break;
             case Commands.AVA_CURR: app.availableCrypto.getAvailableCurrencies(); break;
-            case Commands.SELECT_ITEM: app.selectItem.inspectItem(app.testClassItems.getItems());
+            case Commands.SELECT_ITEM: app.selectItem.browseInvoiceURl(app.selectItem.getInvoiceUrl(app.testClassItems.items)); break;
         
             default:
                 break;

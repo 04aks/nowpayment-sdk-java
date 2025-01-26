@@ -2,7 +2,7 @@ package aks;
 
 import aks.auth.Authenticate;
 import aks.crypto.GET.AvailableCrypto;
-import aks.crypto.GET.SelectItem;
+import aks.crypto.POST.SelectItem;
 import aks.goods.TestClassItems;
 import aks.profile.User;
 
