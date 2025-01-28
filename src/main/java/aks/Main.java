@@ -1,5 +1,8 @@
 package aks;
 
+import aks.statics.Strings;
+import aks.statics.Tickers;
+
 public class Main {
 
     
@@ -25,10 +28,10 @@ public class Main {
         NOWPayment nowPayment = new NOWPayment.Builder()
             .email(System.getenv("NOW_E")+"@gmail.com")
             .password(System.getenv("NOW_P"))
+            .key(Strings.API_KEY)
             .build();
 
-            System.out.println(nowPayment.getAvailableCrypto());
-
+        System.out.println(nowPayment.validateAddress("55DXibeVREUXuj3eRNto27pUozuD2GpdDN1ajkT9mYLu", Tickers.SOLANA));
     }
 
 }

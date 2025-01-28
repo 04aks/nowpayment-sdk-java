@@ -10,4 +10,10 @@ public interface NOWPaymentInterface {
 
     // Create an Invoice
     String createInvoice(Invoice invoice);
+
+    // Check your balance (idk from where tbh)
+    String checkBalance();
+
+    // Check if recipient's wallet address is valid
+    String validateAddress(String address, String ticker);
 }

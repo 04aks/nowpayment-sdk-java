@@ -22,7 +22,7 @@ public class Utilities {
                 return response.body().string();
             }
             else{
-                System.out.println("[GET] Something Went Wrong");
+                System.out.println("[GET] Something Went Wrong " + response.body().string());
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -48,7 +48,7 @@ public class Utilities {
             if(response.isSuccessful()){
                 return response.body().string();
             }else{
-                System.out.println("[POST] Something Went Wrong!");
+                System.out.println("[POST] Something Went Wrong! " + response.body().string());
             }
         }catch(Exception e){
             e.printStackTrace();
