@@ -1,5 +1,7 @@
 package aks;
 
+import aks.goods.Invoice;
+
 public class Main {
 
     
@@ -23,13 +25,19 @@ public class Main {
         // }
 
         NOWPayment nowPayment = new NOWPayment.Builder()
-            .email("bruuuh")
-            .password("bruuuh")
+            .email(System.getenv("NOW_E")+"@gmail.com")
+            .password(System.getenv("NOW_P"))
             .build();
 
 
         // System.out.println(nowPayment.getAvailableCrypto());
         System.out.println(nowPayment.getToken());
+        Invoice syna = new Invoice.Builder()
+        .price_amount(15)
+        .price_currency("usd")
+        .order_description("Syna hat by Central Cee")
+        .build();
+        System.out.println(nowPayment.createInvoice(syna));
 
     }
 

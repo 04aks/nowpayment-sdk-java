@@ -1,6 +1,7 @@
 package aks;
 
 import aks.auth.Authenticate;
+import aks.goods.Invoice;
 import aks.statics.Strings;
 
 public class NOWPayment implements NOWPaymentInterface{
@@ -22,7 +23,7 @@ public class NOWPayment implements NOWPaymentInterface{
         return password;
     }
 
-    //TOKEN SHIT
+    //*TOKEN SHIT
     public String getToken() {
         return token;
     }
@@ -31,13 +32,22 @@ public class NOWPayment implements NOWPaymentInterface{
     }
 
 
-
+    //! METHODS
     @Override
     public String getAvailableCrypto() {
         return app.utils.connectionGet(Strings.AVAILABLE_CRYPTO_URL, Strings.API_KEY);
     }
+    @Override
+    public String createInvoice(Invoice invoice) {
+        String jsonBody = "{\"price_amount\": "+invoice.getPrice_amount()+",\"price_currency\": \"" + invoice.getPrice_currency() + "\",\"order_description\": \"" + invoice.getOrder_description() + "\",\"order_id\": \""+ invoice.getOrder_id() +"\",\"success_url\": \""+ invoice.getSuccess_url() +"\",\"cancel_url\": \""+ invoice.getCancel_url() +"\"}";
+        return app.utils.connectionPost(Strings.CREATE_INVOICE, Strings.API_KEY, jsonBody);
+    }
 
 
+
+
+
+    //! BUILDER
     public static class Builder{
 
         private String email;
