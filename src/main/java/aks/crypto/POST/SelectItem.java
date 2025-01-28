@@ -2,10 +2,8 @@ package aks.crypto.POST;
 
 import java.util.HashMap;
 import java.util.Scanner;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.awt.Desktop;
 import java.net.URI;
 import aks.App;

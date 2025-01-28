@@ -6,10 +6,10 @@ public class Item {
     private String price_currency;
     private String order_description;
 
-    public Item(double pa, String pc, String od){
-        this.price_amount = pa;
-        this.price_currency = pc;
-        this.order_description = od;
+    public Item(double price_amount, String price_currency, String order_description){
+        this.price_amount = price_amount;
+        this.price_currency = price_currency;
+        this.order_description = order_description;
     }
 
 

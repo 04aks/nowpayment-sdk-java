@@ -1,8 +1,7 @@
 package aks.auth;
 
-import java.util.Scanner;
-
-import aks.profile.User;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -10,34 +9,16 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class Authenticate {
-    User user;
-    public Authenticate(User user){
-        this.user = user;
-    }
-
-    public void startAuth(){
-        typeCred(user);
-    }
-
-    void typeCred(User user){
-        System.out.print("Type in you email: ");
-        Scanner scanner = new Scanner(System.in);
-        user.setEmail(scanner.nextLine());
-
-        System.out.print("Type in your Password: ");
-        user.setPass(scanner.nextLine());
-
-        authenticate();
-        scanner.close();
+    public Authenticate(){
     }
 
 
-    void authenticate(){
+    public String authenticate(String email, String password){
         System.out.println("checking your account ...");
         OkHttpClient client = new OkHttpClient();
 
         MediaType media = MediaType.parse("application/json");
-        String jsonBody = "{\"email\": \"" + user.getEmail() + "\",\"password\": \"" + user.getPass() + "\"}";
+        String jsonBody = "{\"email\": \"" + email + "\",\"password\": \"" + password + "\"}";
         RequestBody requestBody = RequestBody.create(jsonBody, media);
 
 
@@ -48,14 +29,21 @@ public class Authenticate {
 
         try(Response response = client.newCall(request).execute()){
             if(response.isSuccessful()){
-                System.out.println(response.body().string());
+
+                ObjectMapper om = new ObjectMapper();
+                JsonNode main = om.readTree(response.body().string());
+
+                if(main.has("token")){
+                    return main.get("token").asText();
+                }
             }
             else{
-                System.out.println(response);
+                throw new IllegalAccessException("Couldn't authenticate your request, check you email and password");
             }
         }catch(Exception e){
             e.printStackTrace();
         } 
+        return null;
             
     }
 
