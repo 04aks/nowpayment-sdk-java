@@ -1,7 +1,5 @@
 package aks;
 
-import aks.auth.Authenticate;
-import aks.goods.Invoice;
 import aks.statics.Strings;
 
 public class NOWPayment implements NOWPaymentInterface{
@@ -27,7 +25,7 @@ public class NOWPayment implements NOWPaymentInterface{
     public String getToken() {
         return token;
     }
-    public void setToken(String token) {
+    private void setToken(String token) {
         this.token = token;
     }
 
@@ -42,6 +40,15 @@ public class NOWPayment implements NOWPaymentInterface{
         String jsonBody = "{\"price_amount\": "+invoice.getPrice_amount()+",\"price_currency\": \"" + invoice.getPrice_currency() + "\",\"order_description\": \"" + invoice.getOrder_description() + "\",\"order_id\": \""+ invoice.getOrder_id() +"\",\"success_url\": \""+ invoice.getSuccess_url() +"\",\"cancel_url\": \""+ invoice.getCancel_url() +"\"}";
         return app.utils.connectionPost(Strings.CREATE_INVOICE, Strings.API_KEY, jsonBody);
     }
+    @Override
+    public String authToken() {
+        String token = app.authenticate.authenticate(this);
+        if(token != null){   
+            setToken(token);
+            return token;
+        }
+        return null;
+    }
 
 
 
@@ -52,8 +59,7 @@ public class NOWPayment implements NOWPaymentInterface{
 
         private String email;
         private String password;
-        private String token;
-        Authenticate authenticate = new Authenticate();
+        
 
         public Builder email(String email){
             this.email = email;
@@ -71,20 +77,7 @@ public class NOWPayment implements NOWPaymentInterface{
                 throw new IllegalStateException("Email and Password are Required");
             }
             
-            
-            
-            try{
-                token = authenticate.authenticate(email, password);
-                if(token != null){
-                    NOWPayment nowPayment = new NOWPayment(this);
-                    nowPayment.setToken(token);
-                    return nowPayment;
-                }
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-            
-            return null;
+            return new NOWPayment(this);
         }
 
     }

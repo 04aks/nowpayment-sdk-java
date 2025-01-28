@@ -1,4 +1,4 @@
-package aks.goods;
+package aks;
 
 public class Invoice {
     

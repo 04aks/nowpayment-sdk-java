@@ -2,6 +2,9 @@ package aks.auth;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import aks.NOWPayment;
+import aks.statics.Strings;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -13,17 +16,17 @@ public class Authenticate {
     }
 
 
-    public String authenticate(String email, String password){
+    public String authenticate(NOWPayment nowPayment){
         System.out.println("checking your account ...");
         OkHttpClient client = new OkHttpClient();
 
         MediaType media = MediaType.parse("application/json");
-        String jsonBody = "{\"email\": \"" + email + "\",\"password\": \"" + password + "\"}";
+        String jsonBody = "{\"email\": \"" + nowPayment.getEmail() + "\",\"password\": \"" + nowPayment.getPassword() + "\"}";
         RequestBody requestBody = RequestBody.create(jsonBody, media);
 
 
         Request request = new Request.Builder()
-            .url("https://api.nowpayments.io/v1/auth")
+            .url(Strings.AUTH_LINK)
             .post(requestBody)
             .build();
 
