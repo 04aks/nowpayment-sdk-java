@@ -1,4 +1,4 @@
-package aks.statics;
+package aks.internal.statics;
 
 public class Tickers {
     

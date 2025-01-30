@@ -1,4 +1,6 @@
-package aks;
+package aks.internal;
+
+import java.util.Map;
 
 public class Invoice {
     
@@ -10,7 +12,9 @@ public class Invoice {
     private String success_url;
     private String cancel_url;
 
-    public Invoice(Builder builder){
+    private Map<String, Object> responseJson;
+
+    private Invoice(Builder builder){
         this.price_amount = builder.price_amount;
         this.price_currency = builder.price_currency;
         this.order_description = builder.order_description;
@@ -43,6 +47,13 @@ public class Invoice {
         return success_url;
     }
 
+
+    public Map<String, Object> getResponseJson() {
+        return responseJson;
+    }
+    public void setResponseJson(Map<String, Object> responseJson) {
+        this.responseJson = responseJson;
+    }
 
 
 

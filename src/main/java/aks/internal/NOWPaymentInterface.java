@@ -1,4 +1,6 @@
-package aks;
+package aks.internal;
+
+import java.util.Map;
 
 public interface NOWPaymentInterface {
 
@@ -9,7 +11,7 @@ public interface NOWPaymentInterface {
     String getAvailableCrypto();
 
     // Create an Invoice
-    String createInvoice(Invoice invoice);
+    Map<String, Object> createInvoice(Invoice invoice);
 
     // Check your balance (idk from where tbh)
     String checkBalance();
@@ -21,5 +23,8 @@ public interface NOWPaymentInterface {
     String convertFiatToCrypto(double amount, String from, String to);
 
     // create a payment
-    String createPayment(Payment payment);
+    Map<String, Object> createPayment(Payment payment);
+
+    //Create a Payment WITH an invoice (COMBINATION)
+    Map<String, Object> createPaymentWithInvoice(PaymentViaInvoice paymentViaInvoice);
 }

@@ -1,4 +1,4 @@
-package aks;
+package aks.internal;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;

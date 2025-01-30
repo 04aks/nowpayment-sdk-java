@@ -1,4 +1,6 @@
-package aks;
+package aks.internal;
+
+import java.util.Map;
 
 public class Payment {
     private double price_amount;
@@ -7,6 +9,8 @@ public class Payment {
     private String ipn_callback_url;
     private String order_id;
     private String order_description;
+
+    private Map<String, Object> responseJson;
 
     private Payment(Builder builder){
         this.price_amount = builder.price_amount;
@@ -36,6 +40,15 @@ public class Payment {
     public String getOrder_id() {
         return order_id;
     }
+
+
+    public void setResponseJson(Map<String, Object> responseJson) {
+        this.responseJson = responseJson;
+    }
+    public Map<String, Object> getResponseJson() {
+        return responseJson;
+    }
+
     
     public static class Builder{
         private double price_amount;

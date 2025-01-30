@@ -5,7 +5,12 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
-import aks.statics.Strings;
+import aks.internal.App;
+import aks.internal.Invoice;
+import aks.internal.NOWPaymentInterface;
+import aks.internal.Payment;
+import aks.internal.PaymentViaInvoice;
+import aks.internal.statics.Strings;
 
 public class NOWPayment implements NOWPaymentInterface{
     
@@ -46,7 +51,7 @@ public class NOWPayment implements NOWPaymentInterface{
         return app.utils.connectionGet(Strings.AVAILABLE_CRYPTO_URL, Strings.API_KEY);
     }
     @Override
-    public String createInvoice(Invoice invoice) {
+    public Map<String, Object> createInvoice(Invoice invoice) {
 
         Map<String, Object> json = new HashMap<>();
         json.put("price_amount", invoice.getPrice_amount());
@@ -60,7 +65,13 @@ public class NOWPayment implements NOWPaymentInterface{
         // ELIMINATE NULL KEYS
         json.entrySet().removeIf(entry -> entry.getValue() == null);
 
-        return app.utils.connectionPost(Strings.CREATE_INVOICE, getKey(), new JSONObject(json).toString());
+        String response = app.utils.connectionPost(Strings.CREATE_INVOICE, getKey(), new JSONObject(json).toString());
+        
+        JSONObject jsonObject = new JSONObject(response);
+        Map<String, Object> map = jsonObject.toMap();
+        
+        invoice.setResponseJson(map);
+        return map;
     }
     @Override
     public String authToken() {
@@ -102,7 +113,7 @@ public class NOWPayment implements NOWPaymentInterface{
         return app.utils.connectionGet(url, getKey());
     }
     @Override
-    public String createPayment(Payment payment) {
+    public Map<String, Object> createPayment(Payment payment) {
         /*
          * pay_currency should include the network 'code' for some coins
          * case with USDT:
@@ -122,9 +133,36 @@ public class NOWPayment implements NOWPaymentInterface{
         // GET RID OF NULL KEYS (OPTIONAL KEYS IN THE API DOCs)
         json.entrySet().removeIf(entry -> entry.getValue() == null);
 
-        return app.utils.connectionPost(Strings.PAYMENT_LINK, getKey(), new JSONObject(json).toString());
-    }
+        String response = app.utils.connectionPost(Strings.PAYMENT_LINK, getKey(), new JSONObject(json).toString());
+        
+        JSONObject jsonObject = new JSONObject(response);
+        Map<String, Object> map = jsonObject.toMap();
 
+        payment.setResponseJson(map);
+        return map;
+    }
+    @Override
+    public Map<String, Object> createPaymentWithInvoice(PaymentViaInvoice paymentViaInvoice) {
+
+        Map<String, Object> json = new HashMap<>();
+        json.put("iid", paymentViaInvoice.getInvoice_id());
+        json.put("pay_currency", paymentViaInvoice.getPay_currency());
+        json.put("purchase_id", paymentViaInvoice.getPurchase_id());
+        json.put("order_description", paymentViaInvoice.getOrder_description());
+        json.put("customer_email", paymentViaInvoice.getCustomer_email());
+        json.put("payout_address", paymentViaInvoice.getPayout_address());
+        json.put("payout_extra_id", paymentViaInvoice.getPayout_extra_id());
+        json.put("payout_currency", paymentViaInvoice.getPayout_currency());
+
+        // KICK OUT THE PAGANS
+        json.entrySet().removeIf(entry -> entry.getValue() == null);
+
+        String response = app.utils.connectionPost(Strings.PAYMENT_VIA_INVOICE, getKey(), new JSONObject(json).toString());
+        
+        JSONObject jsonObject = new JSONObject(response);
+        Map<String, Object> map = jsonObject.toMap();
+        return map;
+    }
 
 
     //! BUILDER

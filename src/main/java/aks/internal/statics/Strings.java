@@ -1,4 +1,4 @@
-package aks.statics;
+package aks.internal.statics;
 
 public class Strings {
     public static final String AVAILABLE_CRYPTO_URL = "https://api.nowpayments.io/v1/merchant/coins";
@@ -8,4 +8,5 @@ public class Strings {
     public static final String BALANCE_LINK = "https://api.nowpayments.io/v1/balance";
     public static final String VALID_ADDRESS_LINK = "https://api.nowpayments.io/v1/payout/validate-address";
     public static final String PAYMENT_LINK = "https://api.nowpayments.io/v1/payment";
+    public static final String PAYMENT_VIA_INVOICE = "https://api.nowpayments.io/v1/invoice-payment";
 }

@@ -1,10 +1,10 @@
-package aks.auth;
+package aks.internal.auth;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import aks.NOWPayment;
-import aks.statics.Strings;
+import aks.internal.statics.Strings;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
