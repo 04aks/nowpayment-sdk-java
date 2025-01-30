@@ -6,6 +6,7 @@ public class Invoice {
     private String price_currency;
     private String order_description;
     private String order_id;
+    private String ipn_callback_url;
     private String success_url;
     private String cancel_url;
 
@@ -14,6 +15,7 @@ public class Invoice {
         this.price_currency = builder.price_currency;
         this.order_description = builder.order_description;
         this.order_id = builder.order_id;
+        this.ipn_callback_url = builder.ipn_callback_url;
         this.success_url = builder.success_url;
         this.cancel_url = builder.cancel_url;
     }
@@ -30,6 +32,9 @@ public class Invoice {
     }
     public String getOrder_id() {
         return order_id;
+    }
+    public String getIpn_callback_url() {
+        return ipn_callback_url;
     }
     public String getCancel_url() {
         return cancel_url;
@@ -48,6 +53,7 @@ public class Invoice {
         private String price_currency; //required
         private String order_description;
         private String order_id;
+        private String ipn_callback_url;
         private String success_url;
         private String cancel_url;
 
@@ -65,6 +71,10 @@ public class Invoice {
         }
         public Builder order_id(String order_id){
             this.order_id = order_id;
+            return this;
+        }
+        public Builder ipn_callback_url(String ipn_callback_url){
+            this.ipn_callback_url = ipn_callback_url;
             return this;
         }
         public Builder success_url(String success_url){

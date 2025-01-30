@@ -48,12 +48,19 @@ public class NOWPayment implements NOWPaymentInterface{
     @Override
     public String createInvoice(Invoice invoice) {
 
-        if(getKey() == null){
-            throw new IllegalAccessError("API key required");
-        }
+        Map<String, Object> json = new HashMap<>();
+        json.put("price_amount", invoice.getPrice_amount());
+        json.put("price_currency", invoice.getPrice_currency());
+        json.put("order_description", invoice.getOrder_description());
+        json.put("order_id", invoice.getOrder_id());
+        json.put("cancel_url", invoice.getCancel_url());
+        json.put("success_url", invoice.getSuccess_url());
+        json.put("ipn_callback_url", invoice.getIpn_callback_url());
 
-        String jsonBody = "{\"price_amount\": "+invoice.getPrice_amount()+",\"price_currency\": \"" + invoice.getPrice_currency() + "\",\"order_description\": \"" + invoice.getOrder_description() + "\",\"order_id\": \""+ invoice.getOrder_id() +"\",\"success_url\": \""+ invoice.getSuccess_url() +"\",\"cancel_url\": \""+ invoice.getCancel_url() +"\"}";
-        return app.utils.connectionPost(Strings.CREATE_INVOICE, getKey(), jsonBody);
+        // ELIMINATE NULL KEYS
+        json.entrySet().removeIf(entry -> entry.getValue() == null);
+
+        return app.utils.connectionPost(Strings.CREATE_INVOICE, getKey(), new JSONObject(json).toString());
     }
     @Override
     public String authToken() {
@@ -147,6 +154,9 @@ public class NOWPayment implements NOWPaymentInterface{
         public NOWPayment build(){
             if(email == null && password == null){
                 throw new IllegalStateException("Email and Password are Required");
+            }
+            if(key == null || key.isEmpty()){
+                throw new IllegalAccessError("API key required");
             }
             
             return new NOWPayment(this);
