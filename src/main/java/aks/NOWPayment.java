@@ -1,5 +1,10 @@
 package aks;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.JSONObject;
+
 import aks.statics.Strings;
 
 public class NOWPayment implements NOWPaymentInterface{
@@ -97,8 +102,20 @@ public class NOWPayment implements NOWPaymentInterface{
          *      pay_currency = "usdt" sends an Error
          *      pay_currency = "usdtbsc" goes through
          */
-        String jsonBody = "{\"price_amount\": "+payment.getPrice_amount()+",\"price_currency\": \""+ payment.getPrice_currency() +"\",\"pay_currency\": \""+payment.getPay_currency()+"\",\"ipn_callback_url\": \""+payment.getIpn_callback_url()+"\",\"order_id\": \""+payment.getOrder_id()+"\",\"order_description\": \""+payment.getOrder_description()+"\"}";
-        return app.utils.connectionPost(Strings.PAYMENT_LINK, getKey(), jsonBody);
+
+        // CREATE POST JSON
+        Map<String, Object> json = new HashMap<>();
+        json.put("price_amount", payment.getPrice_amount());
+        json.put("price_currency", payment.getPrice_currency());
+        json.put("pay_currency", payment.getPay_currency());
+        json.put("ipn_callback_url", payment.getIpn_callback_url());
+        json.put("order_id", payment.getOrder_id());
+        json.put("order_description", payment.getOrder_description());
+
+        // GET RID OF NULL KEYS (OPTIONAL KEYS IN THE API DOCs)
+        json.entrySet().removeIf(entry -> entry.getValue() == null);
+
+        return app.utils.connectionPost(Strings.PAYMENT_LINK, getKey(), new JSONObject(json).toString());
     }
 
 

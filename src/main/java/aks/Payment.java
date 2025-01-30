@@ -41,7 +41,7 @@ public class Payment {
         private double price_amount;
         private String price_currency;
         private String pay_currency;
-        private String ipn_callback_url = "https://nowpayments.io";
+        private String ipn_callback_url;
         private String order_id;
         private String order_description;
 
