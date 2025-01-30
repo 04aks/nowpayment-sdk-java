@@ -31,7 +31,16 @@ public class Main {
             .key(Strings.API_KEY)
             .build();
 
-        System.out.println(nowPayment.validateAddress("55DXibeVREUXuj3eRNto27pUozuD2GpdDN1ajkT9mYLu", Tickers.SOLANA));
+        // System.out.println(nowPayment.validateAddress("0x4879fb6dF3850fb982699EfFd0BE6D3ed604E141", Tickers.USDT_BNB));
+        // System.out.println(nowPayment.convertFiatToCrypto(15.53, "usd", Tickers.BITCOIN));
+        
+        Payment payment = new Payment.Builder()
+            .price_amount(23.00)
+            .price_currency("usd")
+            .pay_currency("doge")
+            .build();
+        
+        System.out.println(nowPayment.createPayment(payment));
     }
 
 }

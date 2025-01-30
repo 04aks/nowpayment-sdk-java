@@ -7,4 +7,5 @@ public class Strings {
     public static final String AUTH_LINK = "https://api.nowpayments.io/v1/auth";
     public static final String BALANCE_LINK = "https://api.nowpayments.io/v1/balance";
     public static final String VALID_ADDRESS_LINK = "https://api.nowpayments.io/v1/payout/validate-address";
+    public static final String PAYMENT_LINK = "https://api.nowpayments.io/v1/payment";
 }

@@ -16,4 +16,10 @@ public interface NOWPaymentInterface {
 
     // Check if recipient's wallet address is valid
     String validateAddress(String address, String ticker);
+
+    // get estimated amount in crypto
+    String convertFiatToCrypto(double amount, String from, String to);
+
+    // create a payment
+    String createPayment(Payment payment);
 }

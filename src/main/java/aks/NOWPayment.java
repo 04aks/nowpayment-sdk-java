@@ -61,7 +61,7 @@ public class NOWPayment implements NOWPaymentInterface{
     }
     @Override
     public String checkBalance() {
-        //? BRUH CANT MAKE THIS REQUEST FROM WHERE IM FROM (proper dump country), GOTTA CHECK IF IT WORKS
+        // GOTTA WHITELIST AN IP ADDRESS IN https://nowpayment.io
         if(getKey() == null){
             throw new IllegalAccessError("API key might be missing");
         }
@@ -80,7 +80,26 @@ public class NOWPayment implements NOWPaymentInterface{
         String jsonBody = "{\"address\": \""+ address +"\", \"currency\": \""+ ticker +"\", \"extra_id\":null}";
         return app.utils.connectionPost(Strings.VALID_ADDRESS_LINK, getKey(), jsonBody);
     }
-
+    @Override
+    public String convertFiatToCrypto(double amount, String from, String to) {
+        /*
+         * raw ticket for the variable 'String to'
+         * (Ex: usdt) NOT "usdtsol" ....
+         */
+        String url = "https://api.nowpayments.io/v1/estimate?amount="+ amount +"&currency_from="+ from +"&currency_to=" + to;
+        return app.utils.connectionGet(url, getKey());
+    }
+    @Override
+    public String createPayment(Payment payment) {
+        /*
+         * pay_currency should include the network 'code' for some coins
+         * case with USDT:
+         *      pay_currency = "usdt" sends an Error
+         *      pay_currency = "usdtbsc" goes through
+         */
+        String jsonBody = "{\"price_amount\": "+payment.getPrice_amount()+",\"price_currency\": \""+ payment.getPrice_currency() +"\",\"pay_currency\": \""+payment.getPay_currency()+"\",\"ipn_callback_url\": \""+payment.getIpn_callback_url()+"\",\"order_id\": \""+payment.getOrder_id()+"\",\"order_description\": \""+payment.getOrder_description()+"\"}";
+        return app.utils.connectionPost(Strings.PAYMENT_LINK, getKey(), jsonBody);
+    }
 
 
 
