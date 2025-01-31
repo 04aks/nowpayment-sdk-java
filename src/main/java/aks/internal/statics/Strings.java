@@ -9,4 +9,6 @@ public class Strings {
     public static final String VALID_ADDRESS_LINK = "https://api.nowpayments.io/v1/payout/validate-address";
     public static final String PAYMENT_LINK = "https://api.nowpayments.io/v1/payment";
     public static final String PAYMENT_VIA_INVOICE = "https://api.nowpayments.io/v1/invoice-payment";
+    public static final String PAYMENT_STATUS = "https://api.nowpayments.io/v1/payment/";
+    public static final String PAYMENTS_LIST = "https://api.nowpayments.io/v1/payment/?limit=10&page=0&sortBy=created_at&orderBy=asc&dateFrom=2020-01-01&dateTo=2023-07-01&invoiceId=6200264890";
 }

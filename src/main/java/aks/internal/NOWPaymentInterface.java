@@ -27,4 +27,8 @@ public interface NOWPaymentInterface {
 
     //Create a Payment WITH an invoice (COMBINATION)
     Map<String, Object> createPaymentWithInvoice(PaymentViaInvoice paymentViaInvoice);
+
+    Map<String, Object> getPaymentStatusById(String id);
+
+    Map<String, Object> getPaymentsList(String token);
 }

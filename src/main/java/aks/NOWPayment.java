@@ -163,7 +163,25 @@ public class NOWPayment implements NOWPaymentInterface{
         Map<String, Object> map = jsonObject.toMap();
         return map;
     }
-
+    @Override
+    public Map<String, Object> getPaymentStatusById(String id) {
+        //! GOTTA CHECK IF THIS WORKS, LATER
+        String response = app.utils.connectionGet(Strings.PAYMENT_STATUS + id, getKey());
+        JSONObject jsonObject = new JSONObject(response);
+        return jsonObject.toMap();
+    }
+    @Override
+    public Map<String, Object> getPaymentsList(String token) {
+        /*
+         * token is a parameter because
+         * it is changing 
+         * the token expires every 5 minutes I believe
+         */
+        String response = app.utils.authConnectionGet(Strings.PAYMENTS_LIST, getKey(), token);
+        System.out.println(response);
+        JSONObject jsonObject = new JSONObject(response);
+        return jsonObject.toMap();
+    }
 
     //! BUILDER
     public static class Builder{

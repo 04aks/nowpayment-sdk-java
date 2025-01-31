@@ -56,4 +56,27 @@ public class Utilities {
 
         return null;
     }
+
+    public String authConnectionGet(String url, String API_KEY, String token){
+
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+            .url(url)
+            .header("x-api-key", API_KEY)
+            .header("Authorization", "Bearer " + token)
+            .build();
+
+
+            try(Response response = client.newCall(request).execute()){
+                if(response.isSuccessful()){
+                    return response.body().string();
+                }else{
+                    System.out.println(response.body().string());
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
+            return null;
+    }
 }
