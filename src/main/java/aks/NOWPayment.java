@@ -10,6 +10,7 @@ import aks.internal.Invoice;
 import aks.internal.NOWPaymentInterface;
 import aks.internal.Payment;
 import aks.internal.PaymentViaInvoice;
+import aks.internal.Payout;
 import aks.internal.statics.Strings;
 
 public class NOWPayment implements NOWPaymentInterface{
@@ -181,6 +182,28 @@ public class NOWPayment implements NOWPaymentInterface{
         System.out.println(response);
         JSONObject jsonObject = new JSONObject(response);
         return jsonObject.toMap();
+    }
+    @Override
+    public Map<String, Object> createMassPayout(Payout payout) {
+        /*
+         * Obviously you need to have balance 
+         * in https://NOWpayment.io for this to work
+         */
+        if(getToken() == null){
+            authToken();
+            System.out.println("cooked a token rq");
+        }
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("ipn_callback_url", payout.getIpn_callback_url());
+        map.put("withdrawals", payout.getWithdrawals());
+        
+        // PURGE NULLs
+        map.entrySet().removeIf(entry -> entry.getValue() == null);
+        
+        String r = app.utils.connectionPost(Strings.CREATE_PAYOUT, getKey(), getToken(), map);
+        JSONObject object = new JSONObject(r);
+        return object.toMap();
     }
 
     //! BUILDER

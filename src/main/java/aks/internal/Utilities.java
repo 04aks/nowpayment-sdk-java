@@ -1,5 +1,9 @@
 package aks.internal;
 
+import java.util.Map;
+
+import org.json.JSONObject;
+
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -54,6 +58,33 @@ public class Utilities {
             e.printStackTrace();
         }
 
+        return null;
+    }
+
+    public String connectionPost(String url, String API_KEY, String token, Map<String, Object> data){
+
+        OkHttpClient client = new OkHttpClient();
+
+        MediaType json = MediaType.parse("application/json");
+
+        JSONObject object = new JSONObject(data);
+        RequestBody requestBody = RequestBody.create(object.toString(), json);
+
+        Request request = new Request.Builder()
+            .url(url)
+            .header("x-api-key", API_KEY)
+            .header("Authorization", "Bearer: " + token)
+            .post(requestBody)
+            .build();
+
+
+        try(Response response = client.newCall(request).execute()){
+            if(response.isSuccessful()) response.body().string();
+            else System.out.println(response.body().string());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
         return null;
     }
 

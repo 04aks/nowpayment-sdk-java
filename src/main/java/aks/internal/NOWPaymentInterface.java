@@ -13,7 +13,7 @@ public interface NOWPaymentInterface {
     // Create an Invoice
     Map<String, Object> createInvoice(Invoice invoice);
 
-    // Check your balance (idk from where tbh)
+    // Check your balance (idk from where tbh) (from the NOWPayment balance)
     String checkBalance();
 
     // Check if recipient's wallet address is valid
@@ -31,4 +31,6 @@ public interface NOWPaymentInterface {
     Map<String, Object> getPaymentStatusById(String id);
 
     Map<String, Object> getPaymentsList(String token);
+
+    Map<String, Object> createMassPayout(Payout payout);
 }
