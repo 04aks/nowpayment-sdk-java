@@ -58,18 +58,13 @@ public class Payment {
         private String order_id;
         private String order_description;
 
-        public Builder price_amount(double price_amount){
+        public Builder(double price_amount, String price_currency, String pay_currency){
             this.price_amount = price_amount;
-            return this;
-        }
-        public Builder price_currency(String price_currency){
             this.price_currency = price_currency;
-            return this;
-        }
-        public Builder pay_currency(String pay_currency){
             this.pay_currency = pay_currency;
-            return this;
+
         }
+
         public Builder ipn_callback_url(String ipn_callback_url){
             this.ipn_callback_url = ipn_callback_url;
             return this;

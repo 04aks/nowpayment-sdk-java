@@ -2,9 +2,7 @@ package aks;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.json.JSONObject;
-
 import aks.internal.App;
 import aks.internal.Invoice;
 import aks.internal.NOWPaymentInterface;
@@ -49,7 +47,7 @@ public class NOWPayment implements NOWPaymentInterface{
     //! METHODS
     @Override
     public String getAvailableCrypto() {
-        return app.utils.connectionGet(Strings.AVAILABLE_CRYPTO_URL, Strings.API_KEY);
+        return app.utils.connectionGet(Strings.AVAILABLE_CRYPTO_URL, getKey());
     }
     @Override
     public Map<String, Object> createInvoice(Invoice invoice) {
@@ -187,11 +185,15 @@ public class NOWPayment implements NOWPaymentInterface{
     public Map<String, Object> createMassPayout(Payout payout) {
         /*
          * Obviously you need to have balance 
-         * in https://NOWpayment.io for this to work
+         * in https://NOWpayments.io for this to work
+         * 
+         * AND whitelist the IP address of the machine your making this call from
+         * 
+         * AND each crypto address in each withdrawal object has to be whitelisted as well
+         * (to receive crypto assets into YOUR wallets from NOWPayment balance)
          */
         if(getToken() == null){
             authToken();
-            System.out.println("cooked a token rq");
         }
 
         Map<String, Object> map = new HashMap<>();
@@ -213,15 +215,9 @@ public class NOWPayment implements NOWPaymentInterface{
         private String password;
         private String key;
         
-
-        public Builder email(String email){
+        public Builder(String email, String password){
             this.email = email;
-            return this;
-        }
-
-        public Builder password(String password){
             this.password = password;
-            return this;
         }
 
         public Builder key(String key){
@@ -231,9 +227,6 @@ public class NOWPayment implements NOWPaymentInterface{
 
 
         public NOWPayment build(){
-            if(email == null && password == null){
-                throw new IllegalStateException("Email and Password are Required");
-            }
             if(key == null || key.isEmpty()){
                 throw new IllegalAccessError("API key required");
             }
