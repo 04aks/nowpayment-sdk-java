@@ -1,8 +1,9 @@
 package aks.internal.statics;
 
 public class Strings {
+    public static final String BASE_URL = "https://api.nowpayments.io/v1";
     public static final String AVAILABLE_CRYPTO_URL = "https://api.nowpayments.io/v1/merchant/coins";
-    public static final String API_KEY = System.getenv("NOWPAYMENT_KEY");
+    public static final String API_KEY = System.getenv("nowpayment_api_key");
     public static final String CREATE_INVOICE = "https://api.nowpayments.io/v1/invoice";
     public static final String AUTH_LINK = "https://api.nowpayments.io/v1/auth";
     public static final String BALANCE_LINK = "https://api.nowpayments.io/v1/balance";
