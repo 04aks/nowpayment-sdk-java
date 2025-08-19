@@ -1,6 +1,7 @@
 package io.github.aks.nowpayment.client;
 
 import io.github.aks.nowpayment.auth.AuthProvider;
+import io.github.aks.nowpayment.service.InvoiceService;
 import io.github.aks.nowpayment.service.PaymentService;
 import io.github.aks.nowpayment.transport.HttpTransport;
 import io.github.aks.nowpayment.util.JsonSerializer;
@@ -18,5 +19,8 @@ public class NOWPaymentClient {
 
     public PaymentService payments(){
         return new PaymentService(transport, auth, json);
+    }
+    public InvoiceService invoices(){
+        return new InvoiceService(transport, auth, json);
     }
 }
