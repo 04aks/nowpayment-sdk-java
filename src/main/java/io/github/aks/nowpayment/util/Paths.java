@@ -5,5 +5,6 @@ public class Paths {
     public static final String PATH_INVOICE = "/invoice";
     public static final String PATH_PAYMENT = "/payment";
     public static final String PATH_AUTH = "/auth";
+    public static final String PATH_BALANCE = "/balance";
 
 }
