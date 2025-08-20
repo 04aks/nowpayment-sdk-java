@@ -40,7 +40,7 @@ public class HttpTransport {
                 .url(baseUrl + path)
                 .post(requestBody);
 
-        headers.forEach(requestBuilder::addHeader);
+        if(headers != null) headers.forEach(requestBuilder::addHeader);
         Request request = requestBuilder.build();
         try(Response response = client.newCall(request).execute()){
             if(response.isSuccessful()){

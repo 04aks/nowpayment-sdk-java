@@ -1,8 +1,6 @@
-package io.github.aks.nowpayment.model;
+package io.github.aks.nowpayment.model.invoice;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.math.BigDecimal;
 
 public class InvoiceResponse {
     @JsonProperty("id")

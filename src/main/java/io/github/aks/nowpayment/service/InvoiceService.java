@@ -1,8 +1,8 @@
 package io.github.aks.nowpayment.service;
 
 import io.github.aks.nowpayment.auth.AuthProvider;
-import io.github.aks.nowpayment.model.InvoiceRequest;
-import io.github.aks.nowpayment.model.InvoiceResponse;
+import io.github.aks.nowpayment.model.invoice.InvoiceRequest;
+import io.github.aks.nowpayment.model.invoice.InvoiceResponse;
 import io.github.aks.nowpayment.transport.HttpTransport;
 import io.github.aks.nowpayment.util.JsonSerializer;
 import io.github.aks.nowpayment.util.Paths;

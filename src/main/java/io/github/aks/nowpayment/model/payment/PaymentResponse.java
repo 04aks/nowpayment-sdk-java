@@ -1,4 +1,4 @@
-package io.github.aks.nowpayment.model;
+package io.github.aks.nowpayment.model.payment;
 
 import java.math.BigDecimal;
 

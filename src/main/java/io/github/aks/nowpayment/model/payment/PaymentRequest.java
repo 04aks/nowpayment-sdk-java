@@ -1,4 +1,4 @@
-package io.github.aks.nowpayment.model;
+package io.github.aks.nowpayment.model.payment;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
