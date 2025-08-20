@@ -6,5 +6,6 @@ public class Paths {
     public static final String PATH_PAYMENT = "/payment";
     public static final String PATH_AUTH = "/auth";
     public static final String PATH_BALANCE = "/balance";
+    public static final String PATH_VALIDATE_ADDRESS = "/payout/validate-address";
 
 }
