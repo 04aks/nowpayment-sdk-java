@@ -5,6 +5,7 @@ import io.github.aks.nowpayment.model.InvoiceRequest;
 import io.github.aks.nowpayment.model.InvoiceResponse;
 import io.github.aks.nowpayment.transport.HttpTransport;
 import io.github.aks.nowpayment.util.JsonSerializer;
+import io.github.aks.nowpayment.util.Paths;
 
 public class InvoiceService {
     private HttpTransport transport;
@@ -17,7 +18,7 @@ public class InvoiceService {
     }
     public InvoiceResponse createInvoice(InvoiceRequest req){
         String body = json.toJson(req);
-        String response = transport.post("/invoice", body, auth.getAuthHeaders());
+        String response = transport.post(Paths.PATH_INVOICE, body, auth.getAuthHeaders());
         return json.fromJson(response, InvoiceResponse.class);
     }
 }

@@ -5,6 +5,7 @@ import io.github.aks.nowpayment.model.PaymentRequest;
 import io.github.aks.nowpayment.model.PaymentResponse;
 import io.github.aks.nowpayment.transport.HttpTransport;
 import io.github.aks.nowpayment.util.JsonSerializer;
+import io.github.aks.nowpayment.util.Paths;
 
 public class PaymentService {
     private final HttpTransport transport;
@@ -17,7 +18,7 @@ public class PaymentService {
     }
     public PaymentResponse createPayment(PaymentRequest request){
         String body = json.toJson(request);
-        String response = transport.post("/payment", body, auth.getAuthHeaders());
+        String response = transport.post(Paths.PATH_PAYMENT, body, auth.getAuthHeaders());
         return json.fromJson(response, PaymentResponse.class);
     }
 }
