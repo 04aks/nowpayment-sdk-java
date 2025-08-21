@@ -68,14 +68,9 @@ public class PaymentRequest {
         private String orderDescription;
         private String ipnCallbackUrl;
 
-        public Builder priceAmount(BigDecimal priceAmount) {
+        public Builder(BigDecimal priceAmount, String priceCurrency){
             this.priceAmount = priceAmount;
-            return this;
-        }
-
-        public Builder priceCurrency(String priceCurrency) {
             this.priceCurrency = priceCurrency;
-            return this;
         }
 
         public Builder payCurrency(String payCurrency) {

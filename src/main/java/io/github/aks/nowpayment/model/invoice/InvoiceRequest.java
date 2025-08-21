@@ -40,14 +40,11 @@ public class InvoiceRequest {
         private String successUrl;
         private String cancelUrl;
 
-        public Builder priceAmount(String priceAmount){
+        public Builder(String priceAmount, String priceCurrency){
             this.priceAmount = priceAmount;
-            return this;
-        }
-        public Builder priceCurrency(String priceCurrency){
             this.priceCurrency = priceCurrency;
-            return this;
         }
+
         public Builder orderId(String orderId){
             this.orderId = orderId;
             return this;

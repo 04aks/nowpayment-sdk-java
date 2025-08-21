@@ -15,6 +15,11 @@ public class ValidateAddressRequest {
     public ValidateAddressRequest(String address, String currency, String extra_id){
         this.address = address;
         this.currency = currency;
+        /*
+            it is long to make the class a Builder just because of this one value
+            it shall live on as a required var O>
+            (even tho it is not)
+         */
         this.extra_id = extra_id;
     }
 
