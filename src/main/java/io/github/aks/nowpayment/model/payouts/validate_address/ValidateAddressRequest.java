@@ -1,7 +1,9 @@
 package io.github.aks.nowpayment.model.payouts.validate_address;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ValidateAddressRequest {
     @JsonProperty("address")
     private String address;

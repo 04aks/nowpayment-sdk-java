@@ -1,8 +1,10 @@
 package io.github.aks.nowpayment.model.payment;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PaymentRequest {
 
     @JsonProperty("price_amount")
