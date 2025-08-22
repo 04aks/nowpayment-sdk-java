@@ -31,6 +31,34 @@ public class InvoiceRequest {
         this.cancelUrl = builder.cancelUrl;
     }
 
+    public String getPriceAmount() {
+        return priceAmount;
+    }
+
+    public String getPriceCurrency() {
+        return priceCurrency;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public String getOrderDescription() {
+        return orderDescription;
+    }
+
+    public String getIpnCallbackUrl() {
+        return ipnCallbackUrl;
+    }
+
+    public String getSuccessUrl() {
+        return successUrl;
+    }
+
+    public String getCancelUrl() {
+        return cancelUrl;
+    }
+
     public static class Builder{
         private String priceAmount;
         private String priceCurrency;
