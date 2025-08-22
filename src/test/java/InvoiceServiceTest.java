@@ -1,4 +1,5 @@
 import io.github.aks.nowpayment.client.NOWPaymentClient;
+import io.github.aks.nowpayment.exceptions.InvalidCurrencyException;
 import io.github.aks.nowpayment.model.invoice.InvoiceRequest;
 import io.github.aks.nowpayment.model.invoice.InvoiceResponse;
 import io.github.aks.nowpayment.util.Paths;
@@ -29,7 +30,7 @@ public class InvoiceServiceTest {
                 .build();
 
         assertThrows(
-                RuntimeException.class,
+                InvalidCurrencyException.class,
                 () -> client.invoices().createInvoice(req)
                 );
     }
